@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysl.auth.base.mapper.BaseSequenceManagementMapper">
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ysl.auth.base.entity.BaseSequenceManagement">
+        <id column="id" property="id"  jdbcType="INTEGER"/>
+        <result column="business_type" property="businessType"  jdbcType="VARCHAR"/>
+        <result column="current_value" property="currentValue" jdbcType="BIGINT"/>
+        <result column="prefix" property="prefix"  jdbcType="VARCHAR"/>
+        <result column="step" property="step" jdbcType="INTEGER"/>
+        <result column="length" property="length" jdbcType="INTEGER"/>
+        <result column="created_at" property="createdAt"  jdbcType="TIMESTAMP"/>
+        <result column="updated_at" property="updatedAt"  jdbcType="TIMESTAMP"/>
+        <result column="delete_status" property="deleteStatus"  jdbcType="INTEGER" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, business_type, current_value, prefix, step, length, created_at, updated_at, delete_status
+    </sql>
+
+</mapper>
