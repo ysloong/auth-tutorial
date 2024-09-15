@@ -4,9 +4,10 @@ package com.ysl.auth.base.controller;
 import com.ysl.auth.base.service.IBaseSequenceManagementService;
 import com.ysl.auth.common.dto.BaseSequenceManagementDto;
 import com.ysl.auth.common.message.BaseResMessage;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * <p>

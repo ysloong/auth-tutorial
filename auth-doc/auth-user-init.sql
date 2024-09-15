@@ -1,6 +1,6 @@
 
 
-
+-- 用户登录信息表
 CREATE TABLE user_login_info (
                                  id SERIAL PRIMARY KEY,  -- 自增ID
                                  user_code VARCHAR(20) UNIQUE NOT NULL,  -- 用户编号，唯一
@@ -24,7 +24,7 @@ COMMENT ON COLUMN user_login_info.updated_at IS '更新时间';
 COMMENT ON COLUMN user_login_info.delete_status IS '删除状态，默认为0，0表示未删除，1表示已删除';
 
 
-
+-- 用户基础信息表
 CREATE TABLE user_base_info (
                                 id SERIAL PRIMARY KEY,
                                 user_code VARCHAR(20) UNIQUE NOT NULL,

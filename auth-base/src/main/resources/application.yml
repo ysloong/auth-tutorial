@@ -7,11 +7,15 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: http://47.103.140.52:8848
-        namespace: 8202bec7-684e-4c5a-8791-a18dfd331a83
+        server-addr: http://192.168.10.122:8848
+        namespace: d08320dd-89ea-443e-bb20-311d79592a77
         group: auth-tutorial
         username: nacos
-        password: nacos9Ij991uDDKK
+        password: nacos
+        client:
+          config:
+            timeout: 5000 # 超时时间调整为 5 秒
+
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         file-extension: yaml
@@ -19,6 +23,9 @@ spring:
         group: ${spring.cloud.nacos.discovery.group}
         username: ${spring.cloud.nacos.discovery.username}
         password: ${spring.cloud.nacos.discovery.password}
+        client:
+          config:
+            timeout: 5000 # 超时时间调整为 5 秒
 
 # 添加 spring.config.import 属性
   config:
@@ -27,7 +34,7 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/auth-tutorial?autosave=conservative
+    url: jdbc:postgresql://192.168.10.122:5432/auth-tutorial?currentSchema=auth_base&autosave=conservative
     username: loong
     password: loong
     hikari:
