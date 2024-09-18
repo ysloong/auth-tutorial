@@ -1,0 +1,24 @@
+spring:
+  config:
+    import: nacos:auth-user-dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://192.168.10.122:8848
+        namespace: d08320dd-89ea-443e-bb20-311d79592a77
+        group: auth-tutorial
+        username: nacos
+        password: nacos
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yaml
+        namespace: ${spring.cloud.nacos.discovery.namespace}
+        group: ${spring.cloud.nacos.discovery.group}
+        username: ${spring.cloud.nacos.discovery.username}
+        password: ${spring.cloud.nacos.discovery.password}
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+

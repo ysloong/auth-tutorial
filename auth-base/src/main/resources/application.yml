@@ -1,53 +1,7 @@
 server:
   port: 6004
-
 spring:
   application:
     name: auth-base
-  cloud:
-    nacos:
-      discovery:
-        server-addr: http://192.168.10.122:8848
-        namespace: d08320dd-89ea-443e-bb20-311d79592a77
-        group: auth-tutorial
-        username: nacos
-        password: nacos
-        client:
-          config:
-            timeout: 5000 # 超时时间调整为 5 秒
-
-      config:
-        server-addr: ${spring.cloud.nacos.discovery.server-addr}
-        file-extension: yaml
-        namespace: ${spring.cloud.nacos.discovery.namespace}
-        group: ${spring.cloud.nacos.discovery.group}
-        username: ${spring.cloud.nacos.discovery.username}
-        password: ${spring.cloud.nacos.discovery.password}
-        client:
-          config:
-            timeout: 5000 # 超时时间调整为 5 秒
-
-# 添加 spring.config.import 属性
-  config:
-    import: nacos:auth-base
-
-
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://192.168.10.122:5432/auth-tutorial?currentSchema=auth_base&autosave=conservative
-    username: loong
-    password: loong
-    hikari:
-      maximum-pool-size: 20
-      minimum-idle: 1
-      idle-timeout: 600000
-      max-lifetime: 1800000
-      connection-timeout: 1200
-      login-timeout: 1200
-      validation-timeout: 1000
-      initialization-fail-timeout: 200
-      auto-commit: true
-
   profiles:
     active: dev
-

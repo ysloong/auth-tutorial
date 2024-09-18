@@ -7,7 +7,9 @@ import com.ysl.auth.base.entity.BaseSequenceManagement;
 import com.ysl.auth.base.mapper.BaseSequenceManagementMapper;
 import com.ysl.auth.base.service.IBaseSequenceManagementService;
 import com.ysl.auth.common.dto.BaseSequenceManagementDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,8 +23,14 @@ import java.time.LocalDateTime;
  * @author loong
  * @since 2024-09-12
  */
+@Slf4j
 @Service
 public class BaseSequenceManagementServiceImpl extends ServiceImpl<BaseSequenceManagementMapper, BaseSequenceManagement> implements IBaseSequenceManagementService {
+
+
+    @Value(value = "${key1}")
+    private String key1;
+
     @Override
     public void add(BaseSequenceManagementDto dto) {
         BaseSequenceManagement entity = new BaseSequenceManagement();
@@ -45,6 +53,9 @@ public class BaseSequenceManagementServiceImpl extends ServiceImpl<BaseSequenceM
     @Transactional
     @Override
     public String generateCode(String businessType) {
+        log.info("generateCode key1:{}",key1);
+
+
         LambdaUpdateWrapper<BaseSequenceManagement> updateWrapper = new LambdaUpdateWrapper<>();
         updateWrapper.eq(BaseSequenceManagement::getBusinessType, businessType)
                 .setSql("current_value = current_value + step")
