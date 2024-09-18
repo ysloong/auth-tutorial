@@ -16,4 +16,36 @@ public class AuthRedisAutoConfiguration {
     public RedisService redisService(StringRedisTemplate stringRedisTemplate) {
         return new RedisServiceImpl(stringRedisTemplate);
     }
+
+//    @Value("${spring.redis.host}")
+//    private String host;
+//
+//    @Value("${spring.redis.port}")
+//    private int port;
+//
+//    @Value("${spring.redis.password}")
+//    private String password;
+//
+//    @Value("${spring.redis.database}")
+//    private int database;
+//
+//    @Bean
+//    public RedisConnectionFactory redisConnectionFactory() {
+//        RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
+//        config.setHostName(host);
+//        config.setPort(port);
+//        config.setPassword(password);
+//        config.setDatabase(database);
+//        return new LettuceConnectionFactory(config);
+//    }
+//
+//    @Bean
+//    public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory factory) {
+//        return new StringRedisTemplate(factory);
+//    }
+//
+//    @Bean
+//    public RedisService redisService(StringRedisTemplate stringRedisTemplate) {
+//        return new RedisServiceImpl(stringRedisTemplate);
+//    }
 }
