@@ -9,5 +9,5 @@ import com.ysl.auth.user.dto.RegisterInput;
 public interface IUserService {
 
 
-    UserBaseInfoDto register(RegisterInput registerInput);
+    UserBaseInfoDto register();
 }

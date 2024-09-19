@@ -10,6 +10,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  */
 @EnableDiscoveryClient
 @EnableFeignClients(basePackages = "com.ysl.auth.user.feign")
+//@ComponentScan(basePackages = {"com.ysl.auth.common.redis"})
 @SpringBootApplication
 public class AuthUserApplication {
 

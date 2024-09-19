@@ -25,8 +25,8 @@ public class UserBaseInfoController {
     private IUserService userService;
 
     @PostMapping(value = "/userBaseInfo/register")
-    public BaseResMessage<Object> register(@RequestBody RegisterInput registerInput) {
-        return BaseResMessage.success(userService.register(registerInput));
+    public BaseResMessage<Object> register() {
+        return BaseResMessage.success(userService.register());
     }
 
 }
