@@ -1,0 +1,45 @@
+spring:
+  config:
+    import: nacos:auth-gateway-dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://192.168.10.122:8848
+        namespace: d08320dd-89ea-443e-bb20-311d79592a77
+        group: auth-tutorial
+        username: nacos
+        password: nacos
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yaml
+        namespace: ${spring.cloud.nacos.discovery.namespace}
+        group: ${spring.cloud.nacos.discovery.group}
+        username: ${spring.cloud.nacos.discovery.username}
+        password: ${spring.cloud.nacos.discovery.password}
+    gateway:
+      discovery:
+        heart-beat-interval: 3 # 健康检查的时间间隔
+        locator:
+          enabled: true  # 开启通过Nacos自动发现服务
+      routes:
+        - id: auth-user
+          uri: http://localhost:6003
+          predicates:
+            - Path=/user-api/**
+          filters:
+            - RewritePath=/user-api/(.*), /$1
+        - id: auth-base
+          uri: http://localhost:6004
+          predicates:
+            - Path=/base-api/**
+          filters:
+            - RewritePath=/base-api/(.*), /$1
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+
