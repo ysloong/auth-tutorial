@@ -34,6 +34,12 @@ spring:
             - Path=/base-api/**
           filters:
             - RewritePath=/base-api/(.*), /$1
+        - id: auth-file
+          uri: lb://auth-file
+          predicates:
+            - Path=/file-api/**
+          filters:
+            - RewritePath=/file-api/(.*), /$1
 management:
   endpoints:
     web:
