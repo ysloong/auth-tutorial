@@ -22,6 +22,10 @@ spring:
         locator:
           enabled: true  # 开启通过Nacos自动发现服务
       routes:
+        - id: auth-security
+          uri: lb://auth-security
+          predicates:
+            - Path=/auth/**
         - id: auth-user
           uri: lb://auth-user
           predicates:
@@ -40,6 +44,22 @@ spring:
             - Path=/file-api/**
           filters:
             - RewritePath=/file-api/(.*), /$1
+  security:
+    oauth2:
+      client:
+        registration:
+          auth-service:
+            client-id: client-id
+            client-secret: client-secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope: read,write
+        provider:
+          auth-service:
+            authorization-uri: http://localhost:8081/oauth2/authorize
+            token-uri: http://localhost:8081/oauth2/token
+            user-info-uri: http://localhost:8081/user
+            user-name-attribute: sub
 management:
   endpoints:
     web:

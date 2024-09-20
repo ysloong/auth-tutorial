@@ -1,0 +1,41 @@
+spring:
+  config:
+    import: nacos:auth-security-dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://192.168.10.122:8848
+        namespace: d08320dd-89ea-443e-bb20-311d79592a77
+        group: auth-tutorial
+        username: nacos
+        password: nacos
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yaml
+        namespace: ${spring.cloud.nacos.discovery.namespace}
+        group: ${spring.cloud.nacos.discovery.group}
+        username: ${spring.cloud.nacos.discovery.username}
+        password: ${spring.cloud.nacos.discovery.password}
+  security:
+    oauth2:
+      client:
+        registration:
+          auth-service:
+            client-id: client-id
+            client-secret: client-secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope: read,write
+        provider:
+          auth-service:
+            authorization-uri: http://localhost:6003/oauth2/authorize
+            token-uri: http://localhost:6003/oauth2/token
+            user-info-uri: http://localhost:6003/user
+            user-name-attribute: sub
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+
