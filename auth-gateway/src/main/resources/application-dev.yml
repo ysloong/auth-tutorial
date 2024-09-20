@@ -23,13 +23,13 @@ spring:
           enabled: true  # 开启通过Nacos自动发现服务
       routes:
         - id: auth-user
-          uri: http://localhost:6003
+          uri: lb://auth-user
           predicates:
             - Path=/user-api/**
           filters:
             - RewritePath=/user-api/(.*), /$1
         - id: auth-base
-          uri: http://localhost:6004
+          uri: lb://auth-base
           predicates:
             - Path=/base-api/**
           filters:
