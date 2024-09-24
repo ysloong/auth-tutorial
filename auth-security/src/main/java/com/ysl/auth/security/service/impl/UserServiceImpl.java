@@ -2,6 +2,7 @@ package com.ysl.auth.security.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.ysl.auth.security.dto.LoginRequest;
+import com.ysl.auth.security.dto.QueryUserRequest;
 import com.ysl.auth.security.dto.RegistrationRequest;
 import com.ysl.auth.security.entity.AuthUser;
 import com.ysl.auth.security.entity.AuthUserCredential;
@@ -63,12 +64,28 @@ public class UserServiceImpl implements IUserService {
         wrapper.eq("credential_type", request.getCredentialType());
         wrapper.eq("identifier", request.getUsername());
         AuthUserCredential userCredential = authUserCredentialService.getOne(wrapper);
-
         if (userCredential != null && passwordEncoder.matches(request.getPassword(), userCredential.getCredential())) {
             Map<String, Object> payload = new HashMap<>();
             payload.put("username", userCredential.getUsername());
             return jwtService.createToken(payload);
         }
         return "";
+    }
+
+    @Override
+    public AuthUser queryUser(QueryUserRequest request) {
+
+        QueryWrapper<AuthUserCredential> wrapper = new QueryWrapper<>();
+        wrapper.eq("credential_type", request.getCredentialType());
+        wrapper.eq("identifier", request.getUsername());
+        AuthUserCredential userCredential = authUserCredentialService.getOne(wrapper);
+
+        if (userCredential != null) {
+
+            QueryWrapper<AuthUser> authUserWrapper = new QueryWrapper<>();
+            wrapper.eq("username", userCredential.getUsername());
+            return authUserService.getOne(authUserWrapper);
+        }
+        return null;
     }
 }

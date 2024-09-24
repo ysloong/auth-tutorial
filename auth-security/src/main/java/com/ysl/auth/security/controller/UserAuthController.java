@@ -3,7 +3,9 @@ package com.ysl.auth.security.controller;
 
 import com.ysl.auth.common.message.BaseResMessage;
 import com.ysl.auth.security.dto.LoginRequest;
+import com.ysl.auth.security.dto.QueryUserRequest;
 import com.ysl.auth.security.dto.RegistrationRequest;
+import com.ysl.auth.security.entity.AuthUser;
 import com.ysl.auth.security.service.IUserService;
 import com.ysl.auth.security.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +45,9 @@ public class UserAuthController {
         return BaseResMessage.success(userService.login(request));
     }
 
-    @PostMapping(value = "/api/test")
-    public BaseResMessage<Object> test(@RequestParam String token) {
-        return BaseResMessage.success(jwtService.getPayloadFromToken(token));
+    @PostMapping(value = "/api/queryUser")
+    public BaseResMessage<AuthUser> queryUser(@RequestBody QueryUserRequest request) {
+        return BaseResMessage.success(userService.queryUser(request));
     }
 
 }
