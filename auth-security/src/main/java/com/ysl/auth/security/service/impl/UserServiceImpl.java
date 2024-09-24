@@ -61,7 +61,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public String login(LoginRequest request) {
         QueryWrapper<AuthUserCredential> wrapper = new QueryWrapper<>();
-        wrapper.eq("credential_type", request.getCredentialType());
+//        wrapper.eq("credential_type", request.getCredentialType());
         wrapper.eq("identifier", request.getUsername());
         AuthUserCredential userCredential = authUserCredentialService.getOne(wrapper);
         if (userCredential != null && passwordEncoder.matches(request.getPassword(), userCredential.getCredential())) {
@@ -87,5 +87,13 @@ public class UserServiceImpl implements IUserService {
             return authUserService.getOne(authUserWrapper);
         }
         return null;
+    }
+
+    @Override
+    public AuthUserCredential findByUsername(String username) {
+
+        QueryWrapper<AuthUserCredential> wrapper = new QueryWrapper<>();
+        wrapper.eq("identifier", username);
+        return authUserCredentialService.getOne(wrapper);
     }
 }

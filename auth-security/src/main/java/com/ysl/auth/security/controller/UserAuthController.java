@@ -40,10 +40,10 @@ public class UserAuthController {
         return BaseResMessage.success();
     }
 
-    @PostMapping(value = "/api/login")
-    public BaseResMessage<Object> login(@RequestBody LoginRequest request) {
-        return BaseResMessage.success(userService.login(request));
-    }
+//    @PostMapping(value = "/api/login")
+//    public BaseResMessage<Object> login(@RequestBody LoginRequest request) {
+//        return BaseResMessage.success(userService.login(request));
+//    }
 
     @PostMapping(value = "/api/queryUser")
     public BaseResMessage<AuthUser> queryUser(@RequestBody QueryUserRequest request) {
