@@ -16,26 +16,13 @@ spring:
         group: ${spring.cloud.nacos.discovery.group}
         username: ${spring.cloud.nacos.discovery.username}
         password: ${spring.cloud.nacos.discovery.password}
-  security:
-    oauth2:
-      client:
-        registration:
-          auth-service:
-            client-id: client-id
-            client-secret: client-secret
-            authorization-grant-type: authorization_code
-            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
-            scope: read,write
-        provider:
-          auth-service:
-            authorization-uri: http://localhost:6003/oauth2/authorize
-            token-uri: http://localhost:6003/oauth2/token
-            user-info-uri: http://localhost:6003/user
-            user-name-attribute: sub
 
-mybatis-plus:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+logging:
+  level:
+    org.springframework.security: DEBUG
+jwt:
+  secret: hello123
+  expiration: 86400000 # 24小时，单位毫秒
 
 
 
